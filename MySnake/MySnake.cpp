@@ -2,10 +2,25 @@
 //
 
 #include <iostream>
+#include <conio.h>
+#include "SBody.h"
+#include <ctime>
+#include "Game.h"
+#include <windows.h>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    wchar_t tmp = '\u2780';
+    wcout << tmp;
+    srand(static_cast<unsigned int>(time(0)));
+    Game gm;
+	gm.prepare();
+    //int x = _getch();
+    gm.play();
+
+
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

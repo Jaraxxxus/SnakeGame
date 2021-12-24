@@ -1,20 +1,8 @@
 #include "SBody.h"
 
 
-class SBody
-{
-private:
-
-    struct node {
-        struct node* next;
-        struct node* past;
-        int x;
-        int y;
-    };
-    node* Head;
-    node* Tail;
-    int size;
-    node* addnode(int x, int y)
+ 
+    SBody::node*SBody::addnode(int x, int y)
     {
         node* tmp = new node;
         tmp->next = nullptr;
@@ -25,13 +13,25 @@ private:
         return tmp;
     }
 
-public:
-    SBody() {
+
+    SBody::SBody() {
         Head = nullptr;
         Tail = nullptr;
         size = 0;
+        AddHead(20, 10);
     }
-
+    int SBody::getx() {
+        return Head->x;
+    }
+    int SBody::gety() {
+        return Head->y;
+    }
+    int SBody::getTx() {
+        return Tail->x;
+    }
+    int SBody::getTy() {
+        return Tail->y;
+    }
 
     /*  void AddTail(T x) {
           node* tmp = addnode(x);
@@ -43,7 +43,7 @@ public:
           size++;
       }*/
 
-    void AddHead(int x, int y) {
+    void SBody::AddHead(int x, int y) {
         node* tmp = addnode(x, y);
 
 
@@ -72,7 +72,7 @@ public:
         newtmp->next = tmp;
     }*/
 
-    void DeleteTail() {
+    void SBody::DeleteTail() {
         node* tmp = Tail;
         Tail = tmp->past;
         delete tmp;
@@ -107,10 +107,26 @@ public:
         delete tmp;
         size--;
     }*/
-    void move(int x, int y) {
+    void SBody::move(char cord, int dir) {
+        if (cord =='x') {
+            AddHead(getx() + dir, gety());
+        }
+        if (cord =='y') {
+            AddHead(getx() , gety() + dir);
+        }
+        
+    }
+    bool SBody::checkTail(int x,int y, bool flag) {
+        node* tmp;
+        if (!flag) tmp = Head->next;
+        else tmp = Head;
+        while (tmp)
+        {
+            if (x == tmp->x && y == tmp->y) return true;
+            tmp = tmp->next;
+        }
+        return false;
 
-        AddHead(x, y);
-        DeleteTail();
     }
 
-};
+
