@@ -1,7 +1,10 @@
 ﻿#include "visual.h"
 #include <iostream>
 #include <Windows.h>
-
+#include <stdio.h>
+#include <conio.h>
+#include <string>
+#include <chrono>
 void visual::setCursor(int x, int y)
 {
 	HANDLE handle;
@@ -17,6 +20,41 @@ void visual::setCursor(int x, int y)
 
 visual::visual()
 {
+
+}
+
+void visual::changecolor()
+{
+	
+}
+
+void visual::printgameOver(int x, int y, char dir)
+{
+	std::string s;
+
+	switch (dir)
+	{
+	case '^':
+		setCursor(10 + x, 10 + y);
+		s= "\x1b[31;1m^\x1b[0m\n";
+		break;
+	case 'v':
+		setCursor(10 + x, 10 + y);
+		s = "\x1b[31;1mv\x1b[0m\n";
+		
+		break;
+	case '>':
+		setCursor(10 + x, 10 + y);
+		s = "\x1b[31;1m>\x1b[0m\n";
+		
+		break;
+	case '<':
+		setCursor(10 + x, 10 + y);
+		s = "\x1b[31;1m<\x1b[0m\n";
+		
+		break;
+	}
+	std::cout << s;
 
 }
 
@@ -66,7 +104,7 @@ void visual::hidecursor()
 void visual::printapple(int x, int y)
 {
 	setCursor(10 + x, 10 + y);
-	std::cout << "@";
+	std::cout << "\x1b[32;1m@\x1b[0m\n";
 }
 
 void visual::erese(int x, int y)
