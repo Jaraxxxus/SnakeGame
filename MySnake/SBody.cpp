@@ -75,6 +75,7 @@
     void SBody::DeleteTail() {
         node* tmp = Tail;
         Tail = tmp->past;
+        Tail->next = nullptr;
         delete tmp;
         size--;
     }

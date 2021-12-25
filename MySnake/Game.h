@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <iostream>
+#include <chrono>
 class Game
 {
 public: 
@@ -36,6 +37,7 @@ private:
 	
 	//печать
     void move();	
-
+	void gameoverprint();
+	char getdir();
 };
 

@@ -9,13 +9,13 @@
 
 	void Game::prepare() {
 	//печать поля
+
 		myscreen.showscore(score);
 		myscreen.hidecursor();
 		myscreen.printfield(height, width);
 		myscreen.printhead(body.getx(),body.gety(),'<');
 		generate_apple();
 		
-		// печать змейки
 	
 	}
 	void Game::play(){
@@ -44,6 +44,7 @@
 		if (check_wall()|| check_tail())
 		{
 			gameOver++;
+			gameoverprint();
 		}
 		if (check_apple()) {
 			score += 5;
@@ -59,7 +60,7 @@
 	}
 
 	bool Game::check_apple(){
-		if (appleX == body.getx() || appleY == body.gety()) return true;
+		if (appleX == body.getx() && appleY == body.gety()) return true;
 		return false;
 	}
 	bool Game::check_wall() {
@@ -106,14 +107,14 @@
 	}
 	//печать
 	void Game::generate_apple(){
-		appleX = rand() % 19 + 1;
-		appleY = rand() % 39 + 1;
+		appleX = rand() % 38 + 1;
+		appleY = rand() % 18 + 1;
 	
 		if (body.checkTail(appleX, appleY, 1)){
 
 			badgen++;
 			void generate_apple();
-		}else  myscreen.printapple(appleY, appleX);
+		}else  myscreen.printapple(appleX, appleY);
 			
 	}
 	//печать
@@ -130,16 +131,41 @@
 			break;
 		case Game::edirect::up:
 			myscreen.printmove(body.getx(), body.gety(), '^');
-			body.move('y', 1);
+			body.move('y', -1);
 			break;
 		case Game::edirect::down:
 			myscreen.printmove(body.getx(), body.gety(), 'v');
-			body.move('y', -1);
+			body.move('y', 1);
 			break;
 		}
 	}
 
+	void Game::gameoverprint() {
+
+		myscreen.printgameOver(body.getx(), body.gety(), getdir());
+
+	}
+
+	char Game::getdir()
+	{
+		switch (dir)
+		{
+		case Game::edirect::up:
+			return '^';
+			break;
+		case Game::edirect::down:
+			return 'v';
+			break;
+		case Game::edirect::right:
+			return '>';
+			break;
+		case Game::edirect::left:
+			return '<';
+			break;
+		
 	
+		}
+	}
 
 
 	
