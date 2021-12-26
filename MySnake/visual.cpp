@@ -35,27 +35,26 @@ void visual::printgameOver(int x, int y, char dir)
 	switch (dir)
 	{
 	case '^':
-		setCursor(10 + x, 10 + y);
 		s= "\x1b[31;1m^\x1b[0m\n";
 		break;
 	case 'v':
-		setCursor(10 + x, 10 + y);
 		s = "\x1b[31;1mv\x1b[0m\n";
-		
 		break;
-	case '>':
-		setCursor(10 + x, 10 + y);
-		s = "\x1b[31;1m>\x1b[0m\n";
-		
+	case '>':		
+		s = "\x1b[31;1m>\x1b[0m\n";		
 		break;
-	case '<':
-		setCursor(10 + x, 10 + y);
-		s = "\x1b[31;1m<\x1b[0m\n";
-		
+	case '<':	
+		s = "\x1b[31;1m<\x1b[0m\n";	
 		break;
 	}
-	std::cout << s;
-
+	for (int i = 0; i < 10; i++) {
+		setCursor(10 + x, 10 + y);
+		std::cout << s;
+		Sleep(500);
+		setCursor(10 + x, 10 + y);
+		std::cout << " ";
+		Sleep(500);
+	}
 }
 
 void visual::printfield(int width, int height) {
@@ -99,6 +98,9 @@ void visual::hidecursor()
 	GetConsoleCursorInfo(handle, &structCursorInfo);
 	structCursorInfo.bVisible = FALSE;
 	SetConsoleCursorInfo(handle, &structCursorInfo);
+	/*SetConsoleTextAttribute(handle,
+		BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED |
+		FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);*/
 }
 
 void visual::printapple(int x, int y)

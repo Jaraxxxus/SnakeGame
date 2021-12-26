@@ -15,8 +15,6 @@ int main()
     wcout << tmp;
     srand(static_cast<unsigned int>(time(0)));
     Game gm;
-	gm.prepare();
-    //int x = _getch();
     gm.play();
 
   

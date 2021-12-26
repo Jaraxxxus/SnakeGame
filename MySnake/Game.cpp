@@ -19,22 +19,27 @@
 	
 	}
 	void Game::play(){
+		prepare();
+		input();
 		while (!gameOver) {
-			input();
-			move();
-			check_colisions();
+		if (_kbhit()) input(); 
+		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+		move();
+		check_colisions();
+		Sleep(speed);
 		}
 		
 		
+		
+		//gameover();
 	};
 
 	Game::Game() {
 		score = 0;
 		badgen = 0;
-		speed = 50;
+		speed = 750;
 		gameOver = 0;
-		dir = Game::edirect::stop;
-		olddir = Game::edirect::stop;
+		dir = Game::edirect::left;
 		visual myscreen;
 	}
 
@@ -74,36 +79,38 @@
 	}
 	void Game::input()
 	{
+		
+			switch (_getch())
+			{
+			case 'a':
+				if (dir != Game::edirect::right) {
+					dir = Game::edirect::left;
+				}
 
-		switch (_getch())
-		{
-		case 'a':
-			if (dir != Game::edirect::right) {
-				dir = Game::edirect::left;
+				break;
+			case 'd':
+				if (dir != Game::edirect::left) {
+					dir = Game::edirect::right;
+				}
+				break;
+			case 'w':
+				if (dir != Game::edirect::down) {
+					dir = Game::edirect::up;
+				}
+				break;
+			case 's':
+				if (dir != Game::edirect::up) {
+					dir = Game::edirect::down;
+				}
+				break;
+
+			case 'q':
+				gameOver = true;
+				break;
+			default:
+				break;
 			}
 			
-			break;
-		case 'd':
-			if (dir != Game::edirect::left) {
-				dir = Game::edirect::right;
-			}
-			break;
-		case 'w':
-			if (dir != Game::edirect::down) {
-				dir = Game::edirect::up;
-			}
-			break;
-		case 's':
-			if (dir != Game::edirect::up) {
-				dir = Game::edirect::down;
-			}
-			break;
-
-		case 'q':
-			gameOver = true;
-			break;
-		}
-
 	}
 	//печать
 	void Game::generate_apple(){
