@@ -31,7 +31,7 @@ private:
 	bool check_tail();
 	void input();
 	void gameover();
-	void inp();
+
 	
 	//печать
 	void generate_apple();

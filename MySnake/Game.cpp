@@ -37,7 +37,7 @@
 	Game::Game() {
 		score = 0;
 		badgen = 0;
-		speed = 750;
+		speed = 600;
 		gameOver = 0;
 		dir = Game::edirect::left;
 		visual myscreen;
@@ -49,10 +49,12 @@
 		if (check_wall()|| check_tail())
 		{
 			gameOver++;
+			myscreen.erese(body.getTx(), body.getTy());
 			gameoverprint();
 		}
 		if (check_apple()) {
 			score += 5;
+			if (speed>200)speed -= 20;
 			myscreen.showscore(score);
 			generate_apple();
 		}
