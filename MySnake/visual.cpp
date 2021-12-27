@@ -23,10 +23,7 @@ visual::visual()
 
 }
 
-void visual::changecolor()
-{
-	
-}
+
 
 void visual::printgameOver(int x, int y, char dir)
 {
@@ -35,36 +32,36 @@ void visual::printgameOver(int x, int y, char dir)
 	switch (dir)
 	{
 	case '^':
-		s= "\x1b[31;1m^\x1b[0m\n";
+		s= "^";
 		break;
 	case 'v':
-		s = "\x1b[31;1mv\x1b[0m\n";
+		s = "v";
 		break;
 	case '>':		
-		s = "\x1b[31;1m>\x1b[0m\n";		
+		s = ">";		
 		break;
 	case '<':	
-		s = "\x1b[31;1m<\x1b[0m\n";	
+		s = "<";	
 		break;
 	}
-	for (int i = 0; i < 10; i++) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	for (int i = 0; i < 6; i++) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 12);
 		setCursor(10 + x, 10 + y);
 		std::cout << s;
 		Sleep(500);
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 12);
 		setCursor(10 + x, 10 + y);
 		std::cout << " ";
 		Sleep(500);
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+		
 	}
+	Endgame();
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f  );
 }
 
 void visual::printfield(int width, int height) {
 	HANDLE handle;
 	handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	//int x = body.getx();
-	//int y = body.gety();
 	SetConsoleTextAttribute(handle, BACKGROUND_GREEN | BACKGROUND_INTENSITY);
 	for (int j = 0; j < width; j++) {
 
@@ -95,12 +92,6 @@ void visual::printhead(int x, int y, char dir)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
 }
 
-void visual::printtail(int x, int y)
-{
-
-	setCursor(10 + x, 10 + y);
-	std::cout <<"●" ;
-}
 
 void visual::hidecursor()
 {
@@ -115,9 +106,10 @@ void visual::hidecursor()
 
 void visual::printapple(int x, int y)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 12);
 	setCursor(10 + x, 10 + y);
 	std::cout << "@";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
 }
 
 void visual::erese(int x, int y)
@@ -130,7 +122,7 @@ void visual::erese(int x, int y)
 
 void visual::printmove(int oldx, int oldy, char dir)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 14);
 	switch (dir)
 	{
 	case '^':
@@ -166,4 +158,23 @@ void visual::showscore(int score)
 {
 	setCursor(25, 8);
 	std::cout << "score: "<<score;
+}
+
+void visual::Endgame()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	for (int j = 0; j < 20; j++) {
+
+		for (int i = 0; i < 40; i++) {
+
+			setCursor(10 + i, 10 + j);
+			std::cout << " ";
+
+
+
+		}
+	}
+	setCursor(25 , 20);
+	std::cout << "Game Over";
+	Sleep(10000);
 }

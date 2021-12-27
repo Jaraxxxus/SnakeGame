@@ -114,7 +114,6 @@
 			}
 			
 	}
-	//печать
 	void Game::generate_apple(){
 		appleX = rand() % 38 + 1;
 		appleY = rand() % 18 + 1;
@@ -126,7 +125,7 @@
 		}else  myscreen.printapple(appleX, appleY);
 			
 	}
-	//печать
+	
 	void Game::move() { 
 		switch (dir)
 		{
