@@ -12,9 +12,9 @@ public:
 	static const int width = 40;
 	static const int height = 20;
 	static const int field_size = 900;
-	void prepare();
 	void play();
 	Game();
+//	~Game();
 private:
 	visual myscreen;
 	int badgen;
@@ -22,21 +22,16 @@ private:
 	int speed, score;
 	bool gameOver;
 	SBody body;
-	enum class edirect { left, right, up, down };
+	enum class edirect { stop = 0, left, right, up, down };
 	edirect dir, olddir;
 	void check_colisions();
-
+	void prepare();
 	bool check_apple();
 	bool check_wall();
 	bool check_tail();
 	void input();
-	void gameover();
-
 	
-	//печать
 	void generate_apple();
-	
-	//печать
     void move();	
 	void gameoverprint();
 	char getdir();

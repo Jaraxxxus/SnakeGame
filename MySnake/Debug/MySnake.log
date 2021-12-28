@@ -1,0 +1,6 @@
+﻿  Game.cpp
+  MySnake.cpp
+C:\Users\svtsa\source\repos\MySnake\MySnake\MySnake.cpp(14,19): warning C4566: символ, представленный универсальным именем символа "\u2780", невозможно представить в текущей кодовой странице (1251)
+  Создание кода...
+C:\Users\svtsa\source\repos\MySnake\MySnake\Game.cpp(177): warning C4715: Game::getdir: значение возвращается не при всех путях выполнения
+  MySnake.vcxproj -> C:\Users\svtsa\source\repos\MySnake\Debug\MySnake.exe

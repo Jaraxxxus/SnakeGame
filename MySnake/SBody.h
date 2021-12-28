@@ -22,6 +22,7 @@ private:
 
 public:
     SBody();
+
     int gety();
     int getx();
     int getTx();

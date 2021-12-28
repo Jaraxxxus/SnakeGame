@@ -39,7 +39,7 @@
 		badgen = 0;
 		speed = 600;
 		gameOver = 0;
-		dir = Game::edirect::left;
+		dir = Game::edirect::stop;
 		visual myscreen;
 	}
 
@@ -115,14 +115,15 @@
 			
 	}
 	void Game::generate_apple(){
-		appleX = rand() % 38 + 1;
-		appleY = rand() % 18 + 1;
-	
-		if (body.checkTail(appleX, appleY, 1)){
+		do {
 
-			badgen++;
-			void generate_apple();
-		}else  myscreen.printapple(appleX, appleY);
+			appleX = rand() % 38 + 1;
+			appleY = rand() % 18 + 1;
+
+		} while ((body.checkTail(appleX, appleY, 1)));
+		
+	// надо думать...
+	 myscreen.printapple(appleX, appleY);
 			
 	}
 	
@@ -175,5 +176,5 @@
 		}
 	}
 
-
+	
 	
