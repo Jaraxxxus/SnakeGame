@@ -11,14 +11,13 @@ using namespace std;
 
 int main()
 {
-    wchar_t tmp = '\u2780';
-    wcout << tmp;
+    
+    setlocale(LC_ALL, "Russian");
     srand(static_cast<unsigned int>(time(0)));
     Game gm;
     gm.play();
 
-  
-
+ 
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

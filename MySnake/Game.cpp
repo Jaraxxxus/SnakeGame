@@ -23,7 +23,7 @@
 		input();
 		while (!gameOver) {
 		if (_kbhit()) input(); 
-		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE)); //clean input buffer
 		move();
 		check_colisions();
 		Sleep(speed);
@@ -50,7 +50,10 @@
 		{
 			gameOver++;
 			myscreen.erese(body.getTx(), body.getTy());
+			/*
 			gameoverprint();
+
+			*/
 		}
 		if (check_apple()) {
 			score += 5;
@@ -62,6 +65,12 @@
 		else {
 			myscreen.erese(body.getTx(), body.getTy());
 			body.DeleteTail();
+		}
+
+		if (gameOver) {
+			
+			gameoverprint();
+
 		}
 		
 	}
@@ -82,12 +91,20 @@
 	void Game::input()
 	{
 		
+	
 			switch (_getch())
 			{
 			case 'a':
 				if (dir != Game::edirect::right) {
 					dir = Game::edirect::left;
 				}
+				break;
+			case 'A':
+				if (dir != Game::edirect::right) {
+					dir = Game::edirect::left;
+				}
+				break;
+			
 
 				break;
 			case 'd':
@@ -95,7 +112,18 @@
 					dir = Game::edirect::right;
 				}
 				break;
+			case 'D':
+				if (dir != Game::edirect::left) {
+					dir = Game::edirect::right;
+				}
+				break;
+			
 			case 'w':
+				if (dir != Game::edirect::down) {
+					dir = Game::edirect::up;
+				}
+				break;
+			case 'W':
 				if (dir != Game::edirect::down) {
 					dir = Game::edirect::up;
 				}
@@ -105,8 +133,15 @@
 					dir = Game::edirect::down;
 				}
 				break;
-
+			case 'S':
+				if (dir != Game::edirect::up) {
+					dir = Game::edirect::down;
+				}
+				break;
 			case 'q':
+				gameOver = true;
+				break;
+			case 'Q':
 				gameOver = true;
 				break;
 			default:
