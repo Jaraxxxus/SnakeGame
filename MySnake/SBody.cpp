@@ -20,6 +20,14 @@
         size = 0;
         AddHead(20, 10);
     }
+    SBody::~SBody()
+    {
+        while (Tail) {
+            DeleteTail();
+        }
+        
+
+    }
     int SBody::getx() {
         return Head->x;
     }
@@ -74,7 +82,7 @@
 
     void SBody::DeleteTail() {
         node* tmp = Tail;
-        Tail = tmp->past;
+        if (tmp->past) Tail = tmp->past;
         Tail->next = nullptr;
         delete tmp;
         size--;

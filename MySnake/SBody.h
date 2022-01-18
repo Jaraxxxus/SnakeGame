@@ -22,7 +22,7 @@ private:
 
 public:
     SBody();
-
+    ~SBody();
     int gety();
     int getx();
     int getTx();
