@@ -23,6 +23,18 @@ visual::visual()
 
 }
 
+void visual::choosecolor(color clr, Background back)
+{
+	if (clr == visual::color::Red && back == visual::Background::Green) 
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY | 12);
+	else if (clr == visual::color::White && back == visual::Background::Black)
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	else if (clr == visual::color::Black && back == visual::Background::Green)
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	else if (clr == visual::color::Yellow && back == visual::Background::Green)
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY | 14);
+}
+
 
 
 void visual::printgameOver(int x, int y, char dir)
@@ -45,24 +57,32 @@ void visual::printgameOver(int x, int y, char dir)
 		break;
 	}
 	for (int i = 0; i < 6; i++) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 12);
+		choosecolor(visual::color::Red, visual::Background::Green);
 		setCursor(10 + x, 10 + y);
 		std::cout << s;
 		Sleep(500);
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 12);
+		
 		setCursor(10 + x, 10 + y);
 		std::cout << " ";
 		Sleep(500);
 		
 	}
 	Endgame();
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f  );
+	choosecolor(visual::color::White, visual::Background::Black);
 }
 
 void visual::printfield(int width, int height) {
 	HANDLE handle;
-	handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(handle, BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	setCursor(15,2);
+	std::cout << "Please use only ENG keyboard layout";
+	setCursor(25, 3);
+	std::cout<<"control"<<std::endl;
+	setCursor(20, 4);
+	std::cout << "UP   = W  DOWN  = S" << std::endl;
+	setCursor(20, 5);
+	std::cout << "LEFT = A  RIGHT = D" << std::endl;
+	
+	choosecolor(visual::color::Black, visual::Background::Green);
 	for (int j = 0; j < width; j++) {
 
 		for (int i = 0; i < height; i++) {
@@ -80,16 +100,15 @@ void visual::printfield(int width, int height) {
 		}
 
 	}
-	SetConsoleTextAttribute(handle, 0x0f);
-
+	choosecolor(visual::color::White, visual::Background::Black);
 }
 
 void visual::printhead(int x, int y, char dir)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	choosecolor(visual::color::Black, visual::Background::Green);
 	setCursor(10 + x, 10 + y);
 	std::cout << dir;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	choosecolor(visual::color::White, visual::Background::Black);
 }
 
 
@@ -106,23 +125,23 @@ void visual::hidecursor()
 
 void visual::printapple(int x, int y)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 12);
+	choosecolor(visual::color::Red, visual::Background::Green);
 	setCursor(10 + x, 10 + y);
 	std::cout << "@";
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	choosecolor(visual::color::White, visual::Background::Black);
 }
 
 void visual::erese(int x, int y)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	choosecolor(visual::color::Black, visual::Background::Green);
 	setCursor(10 + x, 10 + y);
 	std::cout << " ";
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	choosecolor(visual::color::White, visual::Background::Black);
 }
 
 void visual::printmove(int oldx, int oldy, char dir)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN | BACKGROUND_INTENSITY| 14);
+	choosecolor(visual::color::Yellow, visual::Background::Green);
 	switch (dir)
 	{
 	case '^':
@@ -150,7 +169,7 @@ void visual::printmove(int oldx, int oldy, char dir)
 		std::cout << dir;
 		break;
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	choosecolor(visual::color::White, visual::Background::Black);
 
 }
 
@@ -162,7 +181,7 @@ void visual::showscore(int score)
 
 void visual::Endgame()
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
+	choosecolor(visual::color::White, visual::Background::Black);
 	for (int j = 0; j < 20; j++) {
 
 		for (int i = 0; i < 40; i++) {
